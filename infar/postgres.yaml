@@ -1,0 +1,63 @@
+version: '3.1'
+
+services:
+  postgres:
+    ports:
+    - 5432:5432
+    container_name: postgres
+    restart: always
+    environment:
+    - TZ=Australia/Hobart
+    - POSTGRES_USER=$PG_USER
+    - POSTGRES_PASSWORD=$DEFAULT_PASSWORD
+    - POSTGRES_HOST_AUTH_METHOD=md5
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+    - postgres:/var/lib/postgresql/data
+    - postgres_backups:/backups
+    image: postgres:9.6.23
+
+  pgadmin:
+    ports:
+    - 5080:80
+    container_name: pgadmin
+    restart: always
+    environment:
+    - TZ=Australia/Hobart
+    - PGADMIN_DEFAULT_EMAIL=$PG_USER@lanceolata.com.au
+    - PGADMIN_DEFAULT_PASSWORD=$DEFAULT_PASSWORD
+    volumes:
+    - pgadmin:/var/lib/pgadmin
+    image: dpage/pgadmin4:5.7
+
+#  redis-cache:
+#    image: redis:latest
+#    restart: on-failure
+#    volumes:
+#      - redis-cache-vol:/data
+#    ports:
+#      - 13000:13000
+#
+#  redis-queue:
+#    image: redis:latest
+#    restart: on-failure
+#    volumes:
+#      - redis-queue-vol:/data
+#    ports:
+#      - 11000:11000
+#
+#  redis-socketio:
+#    image: redis:latest
+#    restart: on-failure
+#    volumes:
+#      - redis-socketio-vol:/data
+#    ports:
+#      - 12000:12000
+
+volumes:
+  postgres:
+  postgres_backups:
+  pgadmin:
+#  redis-cache-vol:
+#  redis-queue-vol:
+#  redis-socketio-vol:

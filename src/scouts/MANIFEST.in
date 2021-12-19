@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include scouts *.css
+recursive-include scouts *.csv
+recursive-include scouts *.html
+recursive-include scouts *.ico
+recursive-include scouts *.js
+recursive-include scouts *.json
+recursive-include scouts *.md
+recursive-include scouts *.png
+recursive-include scouts *.py
+recursive-include scouts *.svg
+recursive-include scouts *.txt
+recursive-exclude scouts *.pyc
